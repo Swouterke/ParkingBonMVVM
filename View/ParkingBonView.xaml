@@ -1,0 +1,78 @@
+﻿<RibbonWindow x:Class="ParkingBonMVVM.View.ParkingBonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
+        xmlns:local="clr-namespace:ParkingBonMVVM.ViewModel"
+        Title="ParkingBon" Height="450" Width="525">
+    <RibbonWindow.Resources>
+        <local:AmountToBoolean x:Key="AmountToBoolean"/>
+    </RibbonWindow.Resources>
+    <RibbonWindow.CommandBindings>
+        <CommandBinding Command="New" Executed="NewExecuted"></CommandBinding>
+        <CommandBinding Command="Open" Executed="OpenExecuted"></CommandBinding>
+        <CommandBinding Command="Save" Executed="SaveExecuted"></CommandBinding>
+    </RibbonWindow.CommandBindings>
+    <DockPanel>
+        <Ribbon DockPanel.Dock="Top">
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar Height="24" Name="Qat">
+                    <RibbonButton Name="OpenButton" SmallImageSource="images/open.jpg" Command="Open"/>
+                    <RibbonButton Name="SaveButton" SmallImageSource="images/save.jpg" Command="{Binding OpenCommand}"} 
+                                  IsEnabled="{Binding ElementName=TeBetalen, Path=Text, Converter={StaticResource AmountToBoolean}}"/>
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu SmallImageSource="images/Bestand.png" KeyTip="A">
+                    <RibbonApplicationMenuItem Header="New" Command="New" ImageSource="images/new.jpg"
+                                               QuickAccessToolBarImageSource="images/new.jpg"/>
+                    <RibbonApplicationMenuItem Header="Open" Command="Open" ImageSource="images/open.jpg"/>
+                    <RibbonApplicationMenuItem Header="Save" Command="Save" ImageSource="images/save.jpg"
+                                               IsEnabled="{Binding ElementName=TeBetalen, Path=Text, Converter={StaticResource AmountToBoolean}}"/>
+                    <RibbonApplicationMenu.FooterPaneContent>
+                        <RibbonButton Command="Close" SmallImageSource="images/close.jpg" Label="Afsluiten"/>
+                    </RibbonApplicationMenu.FooterPaneContent>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Bestand" KeyTip="B">
+                <RibbonGroup Header="Open/Save">
+                    <RibbonMenuButton LargeImageSource="images/Bestand.png" Label="Bestand" KeyTip="B">
+                        <RibbonMenuItem Command="Open" ImageSource="images/open.jpg" Header="Open"/>
+                        <RibbonMenuItem Command="Save" ImageSource="images/save.jpg" Header="Save" 
+                                        IsEnabled="{Binding ElementName=TeBetalen, Path=Text, Converter={StaticResource AmountToBoolean}}"/>
+                    </RibbonMenuButton>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="225"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Name="logoImage" Source="images\parkingbon.jpg" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,0" Width="105"></Image>
+            <TextBlock Text="1€ per half uur" FontWeight="Bold"></TextBlock>
+            <DatePicker Name="DatumBon" SelectedDate="{Binding Datum}" Grid.Column="1" ToolTip="datum selecteren" SelectedDateFormat="Long" VerticalAlignment="Center" Margin="20,45,0,50" Height="24"></DatePicker>
+            <Label Name="AankomstLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Aankomsttijd:</Label>
+            <TextBlock Name="AankomstTextBlock" Text="{Binding AankomstTijd, StringFormat=HH:mm:ss}" 
+                   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center"></TextBlock>
+            <Label Name="BedragLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Bedrag:</Label>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <RepeatButton Margin="20,0"  Name="minder" Width="20" Content="-" FontSize="14" FontWeight="ExtraBold"
+                          Command="{Binding MinderCommand}" Height="31" VerticalAlignment="Top"></RepeatButton>
+                <TextBlock Name="TeBetalenTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100">
+                <TextBlock Name="TeBetalen" Text="{Binding Bedrag}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="DemiBold"/>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="DemiBold"> EURO</TextBlock>
+            </TextBlock>
+                <RepeatButton Margin="20,0,20,0.2"  Name="meer" HorizontalAlignment="Center" Width="20" Content="+" FontSize="14" FontWeight="ExtraBold"
+                          Command="{Binding MeerCommand}" Height="31" VerticalAlignment="Bottom"></RepeatButton>
+            </StackPanel>
+            <Label Name="VertrekLabel" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">Vertrektijd:</Label>
+            <TextBlock Name="VertrekTextBlock" Text="{Binding VertrekTijd, StringFormat=HH:mm:ss}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="200" VerticalAlignment="Center" Height="16"></TextBlock>
+        </Grid>
+    </DockPanel>
+</RibbonWindow>

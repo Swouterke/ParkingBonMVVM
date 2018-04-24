@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingBonMVVM", "ParkingBonMVVM.csproj", "{82C0D304-27AE-42F8-AFE0-A94FC08C3203}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82C0D304-27AE-42F8-AFE0-A94FC08C3203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C0D304-27AE-42F8-AFE0-A94FC08C3203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C0D304-27AE-42F8-AFE0-A94FC08C3203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C0D304-27AE-42F8-AFE0-A94FC08C3203}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8BADEA2-DDF6-4C25-AB41-8E5BEAE4ABBB}
+	EndGlobalSection
+EndGlobal
